@@ -36,7 +36,6 @@
 
 
     body {
-
       font-family:
         -apple-system,
         BlinkMacSystemFont,
@@ -48,7 +47,6 @@
 
       background: #111;
       color: #f5f5f5;
-
     }
 
 
@@ -80,9 +78,27 @@
     .brand {
 
       display: flex;
+
       align-items: center;
 
       gap: 12px;
+
+    }
+
+
+    /*
+       El logo ahora es un enlace
+       que regresa a Home.
+    */
+
+    .logo-link {
+
+      display: block;
+
+      width: 48px;
+      height: 48px;
+
+      flex-shrink: 0;
 
     }
 
@@ -99,6 +115,19 @@
       display: block;
 
       border: 1px solid #333;
+
+      transition:
+        opacity 0.15s ease,
+        transform 0.15s ease;
+
+    }
+
+
+    .logo-link:hover .logo {
+
+      opacity: 0.8;
+
+      transform: scale(1.03);
 
     }
 
@@ -583,6 +612,14 @@
       }
 
 
+      .logo-link {
+
+        width: 40px;
+        height: 40px;
+
+      }
+
+
       .logo {
 
         width: 40px;
@@ -739,16 +776,30 @@
       <div class="brand">
 
 
-        <img
-          src="mad.PNG"
-          alt="Mad Birders"
-          class="logo"
+        <!--
+          LOGO → HOME
+        -->
+
+        <a
+          href="https://www.mad-birders.com"
+          class="logo-link"
+          aria-label="Ir a inicio"
         >
+
+          <img
+            src="mad.PNG"
+            alt="Mad Birders"
+            class="logo"
+          >
+
+        </a>
 
 
         <div class="brand-text">
 
-          <h1>Mad Birders</h1>
+          <h1>
+            Mad Birders
+          </h1>
 
           <div class="subtitle">
             Calendario de salidas
@@ -798,11 +849,17 @@
       <div class="weekdays">
 
         <div class="weekday">LUN</div>
+
         <div class="weekday">MAR</div>
+
         <div class="weekday">MIÉ</div>
+
         <div class="weekday">JUE</div>
+
         <div class="weekday">VIE</div>
+
         <div class="weekday">SÁB</div>
+
         <div class="weekday">DOM</div>
 
       </div>
@@ -935,6 +992,7 @@ async function loadCalendar() {
 
   } catch (error) {
 
+
     console.error(
       "Error:",
       error
@@ -984,6 +1042,7 @@ async function loadCalendar() {
    ========================================== */
 
 function parseICS(data) {
+
 
   const parsedEvents = [];
 
@@ -1089,8 +1148,6 @@ function parseICS(data) {
 
 
       /*
-       * IMPORTANTE
-       *
        * DTSTART de 8 caracteres:
        *
        * 20260918
@@ -1116,7 +1173,6 @@ function parseICS(data) {
             dtstart
           ),
 
-
         end:
           dtend
             ? parseICSDate(
@@ -1124,22 +1180,18 @@ function parseICS(data) {
               )
             : null,
 
-
         allDay:
           allDay,
-
 
         title:
           cleanICS(
             summary
           ),
 
-
         location:
           cleanICS(
             location
           ),
-
 
         description:
           cleanICS(
@@ -1173,6 +1225,7 @@ function parseICSDate(value) {
   if (
     value.length === 8
   ) {
+
 
     const year =
       Number(
@@ -1884,6 +1937,7 @@ function formatDate(
 ) {
 
   return date
+
     .toLocaleDateString(
       "es-MX",
       {
@@ -1891,6 +1945,7 @@ function formatDate(
         month: "short"
       }
     )
+
     .replace(
       ".",
       ""
@@ -1926,6 +1981,7 @@ function renderUpcoming() {
    */
 
   const upcomingEvents =
+
     events
 
       .filter(
@@ -1968,9 +2024,7 @@ function renderUpcoming() {
 
       .sort(
         (a, b) =>
-
           a.date - b.date
-
       )
 
 
