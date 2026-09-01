@@ -16,14 +16,14 @@
         html,
         body {
             width: 100%;
-            min-height: 100%;
+            height: 100%;
         }
 
         body {
             background: #111111;
             color: #f2f2f2;
             font-family: Arial, Helvetica, sans-serif;
-            overflow-x: hidden;
+            overflow: hidden;
         }
 
 
@@ -43,7 +43,7 @@
             font-size: 13px;
             letter-spacing: 0.5px;
 
-            z-index: 20;
+            z-index: 10;
         }
 
         .language {
@@ -72,13 +72,14 @@
 
         .main {
             width: 100%;
-            min-height: 100vh;
+            height: 100vh;
 
             display: flex;
             flex-direction: column;
             align-items: center;
+            justify-content: center;
 
-            padding: 90px 25px 60px;
+            padding: 40px;
         }
 
 
@@ -91,7 +92,7 @@
             font-weight: 400;
             letter-spacing: 4px;
 
-            margin-bottom: clamp(22px, 3vh, 34px);
+            margin-bottom: clamp(22px, 3vh, 36px);
 
             opacity: 0;
             transform: translateY(8px);
@@ -120,19 +121,56 @@
 
 
         /* =========================
-           CALENDAR
+           MENU
         ========================= */
 
-        .calendar-container {
-            width: min(900px, 100%);
+        .main-menu {
+            display: flex;
+            justify-content: center;
+            align-items: center;
 
-            margin-top: clamp(40px, 6vh, 65px);
+            margin-top: clamp(28px, 4vh, 42px);
 
             opacity: 0;
-            transform: translateY(10px);
+            transform: translateY(8px);
 
             animation: fadeUp 0.7s ease forwards;
             animation-delay: 0.35s;
+        }
+
+        .main-menu a {
+            color: #f2f2f2;
+            text-decoration: none;
+            opacity: 0.65;
+
+            display: flex;
+            align-items: center;
+            gap: 7px;
+
+            font-size: 13px;
+            letter-spacing: 0.5px;
+
+            transition: opacity 0.2s ease;
+        }
+
+        .main-menu a:hover {
+            opacity: 1;
+        }
+
+
+        /* =========================
+           CALENDAR ICON
+        ========================= */
+
+        .calendar-icon {
+            width: 15px;
+            height: 15px;
+
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 1.7;
+            stroke-linecap: round;
+            stroke-linejoin: round;
         }
 
 
@@ -182,7 +220,7 @@
             }
 
             .main {
-                padding: 75px 18px 40px;
+                padding: 30px;
             }
 
             .logo {
@@ -193,8 +231,8 @@
                 letter-spacing: 3px;
             }
 
-            .calendar-container {
-                margin-top: 38px;
+            .main-menu {
+                margin-top: 32px;
             }
 
         }
@@ -259,26 +297,56 @@
         >
 
 
-        <!-- CALENDAR -->
+        <!-- MENU -->
 
-        <div class="calendar-container">
+        <nav class="main-menu">
 
-            <!--
-                El calendario se carga desde cal.html
-            -->
+            <a href="cal.html">
 
-            <iframe
-                src="cal.html"
-                title="Calendario The Mad Birders"
-                style="
-                    width: 100%;
-                    min-height: 850px;
-                    border: none;
-                    background: transparent;
-                "
-            ></iframe>
+                <svg
+                    class="calendar-icon"
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                >
 
-        </div>
+                    <rect
+                        x="3"
+                        y="4"
+                        width="18"
+                        height="17"
+                        rx="2"
+                    ></rect>
+
+                    <line
+                        x1="3"
+                        y1="9"
+                        x2="21"
+                        y2="9"
+                    ></line>
+
+                    <line
+                        x1="8"
+                        y1="2"
+                        x2="8"
+                        y2="6"
+                    ></line>
+
+                    <line
+                        x1="16"
+                        y1="2"
+                        x2="16"
+                        y2="6"
+                    ></line>
+
+                </svg>
+
+                <span id="calendar-text">
+                    Calendario
+                </span>
+
+            </a>
+
+        </nav>
 
 
     </main>
@@ -292,6 +360,8 @@
 
         const welcome = document.getElementById("welcome");
 
+        const calendarText = document.getElementById("calendar-text");
+
         const langES = document.getElementById("lang-es");
 
         const langEN = document.getElementById("lang-en");
@@ -303,6 +373,8 @@
 
                 welcome.textContent = "BIENVENIDO";
 
+                calendarText.textContent = "Calendario";
+
                 langES.classList.add("active");
 
                 langEN.classList.remove("active");
@@ -312,6 +384,8 @@
             } else {
 
                 welcome.textContent = "WELCOME";
+
+                calendarText.textContent = "Calendar";
 
                 langEN.classList.add("active");
 
