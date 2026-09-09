@@ -9,6 +9,7 @@
   <link rel="icon" type="image/png" href="mad.PNG">
 
   <style>
+
     * {
       box-sizing: border-box;
     }
@@ -116,11 +117,17 @@
       line-height: 1.8;
     }
 
-    /* GROUP PHOTO */
+    /* PHOTO GALLERY */
+
+    .photo-gallery {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-bottom: 70px;
+    }
 
     .photo-placeholder {
-      width: 100%;
-      aspect-ratio: 16 / 8;
+      aspect-ratio: 16 / 9;
       background: #1b1b1b;
       border: 1px solid #292929;
       display: flex;
@@ -129,68 +136,14 @@
       color: #666;
       font-size: 12px;
       letter-spacing: 1px;
-      margin-bottom: 70px;
+      overflow: hidden;
     }
 
-    /* WHAT WE DO */
-
-    .section-title {
-      text-align: center;
-      margin-bottom: 35px;
-    }
-
-    .section-title h2 {
-      margin: 0;
-      font-size: 14px;
-      font-weight: 400;
-      letter-spacing: 2px;
-      color: #aaa;
-    }
-
-    .values {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 30px;
-      margin-bottom: 75px;
-    }
-
-    .value {
-      text-align: center;
-    }
-
-    .value h3 {
-      margin: 0 0 12px;
-      font-size: 13px;
-      font-weight: 400;
-      letter-spacing: 1.5px;
-    }
-
-    .value p {
-      margin: 0;
-      color: #777;
-      font-size: 13px;
-      line-height: 1.7;
-    }
-
-    /* BIRD GALLERY */
-
-    .gallery {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 8px;
-      margin-bottom: 75px;
-    }
-
-    .gallery-item {
-      aspect-ratio: 1 / 1;
-      background: #1b1b1b;
-      border: 1px solid #292929;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #555;
-      font-size: 11px;
-      letter-spacing: 0.5px;
+    .photo-placeholder img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
     }
 
     /* FINAL MESSAGE */
@@ -242,34 +195,32 @@
         font-size: 15px;
       }
 
-      .photo-placeholder {
-        aspect-ratio: 4 / 3;
-        margin-bottom: 55px;
-      }
-
-      .values {
-        grid-template-columns: 1fr;
-        gap: 35px;
-        margin-bottom: 55px;
-      }
-
-      .gallery {
+      .photo-gallery {
+        grid-template-columns: repeat(3, 1fr);
         gap: 5px;
         margin-bottom: 55px;
+      }
+
+      .photo-placeholder {
+        aspect-ratio: 16 / 9;
       }
 
       .final-message .main-line {
         font-size: 19px;
       }
+
     }
+
   </style>
 </head>
+
 
 <body>
 
   <header>
 
     <!-- Logo -->
+
     <a
       href="https://www.mad-birders.com"
       class="logo-link"
@@ -282,11 +233,17 @@
       >
     </a>
 
+
     <!-- Language -->
+
     <div class="language">
+
       <button id="esBtn" class="active">ES</button>
+
       <span>/</span>
+
       <button id="enBtn">EN</button>
+
     </div>
 
   </header>
@@ -294,12 +251,13 @@
 
   <main>
 
+
     <!-- TITLE -->
 
     <section class="page-title">
 
       <h1 id="pageTitle">
-        Acerca
+        ACERCA
       </h1>
 
       <p id="pageSubtitle">
@@ -321,19 +279,40 @@
         También buscamos conocer, compartir y valorar la biodiversidad que nos rodea, porque creemos que para conservar la naturaleza primero hay que aprender a verla.
       </p>
 
-      <p>
+      <p id="aboutParagraph3">
         Si alguna vez has hecho algo de lo anterior, probablemente ya eres un Mad Birder.
       </p>
 
     </section>
 
 
-    <!-- GROUP PHOTO -->
+    <!-- PHOTO GALLERY -->
 
     <section>
 
-      <div class="photo-placeholder">
-        FOTO DEL GRUPO
+      <div class="photo-gallery">
+
+        <div class="photo-placeholder">
+          <img
+            src="foto1.jpeg"
+            alt="Mad Birders"
+          >
+        </div>
+
+        <div class="photo-placeholder">
+          <img
+            src="foto2.jpeg"
+            alt="Mad Birders"
+          >
+        </div>
+
+        <div class="photo-placeholder">
+          <img
+            src="foto3.jpeg"
+            alt="Mad Birders"
+          >
+        </div>
+
       </div>
 
     </section>
@@ -353,6 +332,7 @@
 
     </section>
 
+
   </main>
 
 
@@ -361,74 +341,56 @@
     const esBtn = document.getElementById("esBtn");
     const enBtn = document.getElementById("enBtn");
 
+
     const content = {
 
       es: {
-        pageTitle: "Sobre nosotros",
-        pageSubtitle: "Una comunidad para observar, aprender y compartir",
+
+        pageTitle: "Acerca",
+
+        pageSubtitle:
+          "Una comunidad para observar, aprender y compartir",
 
         aboutParagraph1:
-          "[Aquí irá el texto sobre Mad Birders.]",
+          "Somos un grupo de amigos totalmente disfuncionales unidos por el amor y la obsesión por las aves, la flora y la fauna de México y el mundo. Salimos al campo, caminamos kilómetros por un ave de 10 centímetros, esperamos horas por una especie que probablemente nunca aparecerá y celebramos como niños cuando finalmente la encontramos.",
 
         aboutParagraph2:
-          "[Aquí puede ir un segundo párrafo sobre la comunidad, nuestras salidas y nuestra filosofía.]",
+          "También buscamos conocer, compartir y valorar la biodiversidad que nos rodea, porque creemos que para conservar la naturaleza primero hay que aprender a verla.",
 
-        whatTitle: "LO QUE HACEMOS",
-
-        observeTitle: "OBSERVAR",
-        observeText:
-          "Salir al campo y descubrir las aves que nos rodean.",
-
-        learnTitle: "APRENDER",
-        learnText:
-          "Compartir conocimiento y aprender juntos sobre las aves.",
-
-        protectTitle: "CONSERVAR",
-        protectText:
-          "Conocer nuestro entorno para aprender a protegerlo.",
-
-        galleryTitle:
-          "ALGUNAS DE LAS AVES QUE HEMOS ENCONTRADO",
+        aboutParagraph3:
+          "Si alguna vez has hecho algo de lo anterior, probablemente ya eres un Mad Birder.",
 
         finalLine:
           "CONOCER PARA PROTEGER",
 
         finalSubline:
           "Observar · Aprender · Compartir"
+
       },
 
+
       en: {
-        pageTitle: "About us",
-        pageSubtitle: "A community to observe, learn and share",
+
+        pageTitle: "About",
+
+        pageSubtitle:
+          "A community to observe, learn and share",
 
         aboutParagraph1:
-          "[The Mad Birders story will go here.]",
+          "We are a totally dysfunctional group of friends united by our love and obsession with the birds, flora and fauna of Mexico and the world. We head outdoors, walk miles for a four-inch bird, wait for hours for a species that will probably never show up, and celebrate like kids when we finally find it.",
 
         aboutParagraph2:
-          "[A second paragraph about the community, our outings and our philosophy can go here.]",
+          "We also seek to learn, share and appreciate the biodiversity around us, because we believe that to protect nature, we first have to learn how to see it.",
 
-        whatTitle: "WHAT WE DO",
-
-        observeTitle: "OBSERVE",
-        observeText:
-          "Get outdoors and discover the birds around us.",
-
-        learnTitle: "LEARN",
-        learnText:
-          "Share knowledge and learn together about birds.",
-
-        protectTitle: "CONSERVE",
-        protectText:
-          "Get to know our environment so we can help protect it.",
-
-        galleryTitle:
-          "SOME OF THE BIRDS WE HAVE FOUND",
+        aboutParagraph3:
+          "If you have ever done any of the above, you are probably already a Mad Birder.",
 
         finalLine:
           "KNOW TO PROTECT",
 
         finalSubline:
           "Observe · Learn · Share"
+
       }
 
     };
@@ -438,8 +400,11 @@
 
       const c = content[lang];
 
-      document.getElementById("pageTitle").textContent = c.pageTitle;
-      document.getElementById("pageSubtitle").textContent = c.pageSubtitle;
+      document.getElementById("pageTitle").textContent =
+        c.pageTitle;
+
+      document.getElementById("pageSubtitle").textContent =
+        c.pageSubtitle;
 
       document.getElementById("aboutParagraph1").textContent =
         c.aboutParagraph1;
@@ -447,29 +412,8 @@
       document.getElementById("aboutParagraph2").textContent =
         c.aboutParagraph2;
 
-      document.getElementById("whatTitle").textContent =
-        c.whatTitle;
-
-      document.getElementById("observeTitle").textContent =
-        c.observeTitle;
-
-      document.getElementById("observeText").textContent =
-        c.observeText;
-
-      document.getElementById("learnTitle").textContent =
-        c.learnTitle;
-
-      document.getElementById("learnText").textContent =
-        c.learnText;
-
-      document.getElementById("protectTitle").textContent =
-        c.protectTitle;
-
-      document.getElementById("protectText").textContent =
-        c.protectText;
-
-      document.getElementById("galleryTitle").textContent =
-        c.galleryTitle;
+      document.getElementById("aboutParagraph3").textContent =
+        c.aboutParagraph3;
 
       document.getElementById("finalLine").textContent =
         c.finalLine;
@@ -477,13 +421,28 @@
       document.getElementById("finalSubline").textContent =
         c.finalSubline;
 
-      esBtn.classList.toggle("active", lang === "es");
-      enBtn.classList.toggle("active", lang === "en");
+      esBtn.classList.toggle(
+        "active",
+        lang === "es"
+      );
+
+      enBtn.classList.toggle(
+        "active",
+        lang === "en"
+      );
+
     }
 
 
-    esBtn.addEventListener("click", () => setLanguage("es"));
-    enBtn.addEventListener("click", () => setLanguage("en"));
+    esBtn.addEventListener(
+      "click",
+      () => setLanguage("es")
+    );
+
+    enBtn.addEventListener(
+      "click",
+      () => setLanguage("en")
+    );
 
   </script>
 
