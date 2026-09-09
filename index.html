@@ -7,11 +7,11 @@
     <title>The Mad Birders</title>
 
     <link
-    rel="icon"
-    type="image/png"
-    href="mad.PNG"
+        rel="icon"
+        type="image/png"
+        href="mad.PNG"
     >
-    
+
     <style>
         * {
             box-sizing: border-box;
@@ -135,6 +135,8 @@
             justify-content: center;
             align-items: center;
 
+            gap: 28px;
+
             margin-top: clamp(28px, 4vh, 42px);
 
             opacity: 0;
@@ -165,10 +167,10 @@
 
 
         /* =========================
-           CALENDAR ICON
+           MENU ICONS
         ========================= */
 
-        .calendar-icon {
+        .menu-icon {
             width: 15px;
             height: 15px;
 
@@ -177,6 +179,8 @@
             stroke-width: 1.7;
             stroke-linecap: round;
             stroke-linejoin: round;
+
+            flex-shrink: 0;
         }
 
 
@@ -239,6 +243,7 @@
 
             .main-menu {
                 margin-top: 32px;
+                gap: 22px;
             }
 
         }
@@ -307,10 +312,53 @@
 
         <nav class="main-menu">
 
+
+            <!-- ABOUT -->
+
+            <a href="about.html">
+
+                <svg
+                    class="menu-icon"
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                >
+
+                    <circle
+                        cx="12"
+                        cy="12"
+                        r="9"
+                    ></circle>
+
+                    <line
+                        x1="12"
+                        y1="10"
+                        x2="12"
+                        y2="16"
+                    ></line>
+
+                    <circle
+                        cx="12"
+                        cy="7"
+                        r="0.7"
+                        fill="currentColor"
+                        stroke="none"
+                    ></circle>
+
+                </svg>
+
+                <span id="about-text">
+                    Acerca
+                </span>
+
+            </a>
+
+
+            <!-- CALENDAR -->
+
             <a href="cal.html">
 
                 <svg
-                    class="calendar-icon"
+                    class="menu-icon"
                     viewBox="0 0 24 24"
                     aria-hidden="true"
                 >
@@ -352,6 +400,7 @@
 
             </a>
 
+
         </nav>
 
 
@@ -364,58 +413,83 @@
 
     <script>
 
-        const welcome = document.getElementById("welcome");
+        const welcome =
+            document.getElementById("welcome");
 
-        const calendarText = document.getElementById("calendar-text");
+        const aboutText =
+            document.getElementById("about-text");
 
-        const langES = document.getElementById("lang-es");
+        const calendarText =
+            document.getElementById("calendar-text");
 
-        const langEN = document.getElementById("lang-en");
+        const langES =
+            document.getElementById("lang-es");
+
+        const langEN =
+            document.getElementById("lang-en");
 
 
         function setLanguage(language) {
 
             if (language === "es") {
 
-                welcome.textContent = "BIENVENIDO";
+                welcome.textContent =
+                    "BIENVENIDO";
 
-                calendarText.textContent = "Calendario";
+                aboutText.textContent =
+                    "Sobre nosotros";
+
+                calendarText.textContent =
+                    "Calendario";
 
                 langES.classList.add("active");
 
                 langEN.classList.remove("active");
 
-                document.documentElement.lang = "es";
+                document.documentElement.lang =
+                    "es";
 
             } else {
 
-                welcome.textContent = "WELCOME";
+                welcome.textContent =
+                    "WELCOME";
 
-                calendarText.textContent = "Calendar";
+                aboutText.textContent =
+                    "About us";
+
+                calendarText.textContent =
+                    "Calendar";
 
                 langEN.classList.add("active");
 
                 langES.classList.remove("active");
 
-                document.documentElement.lang = "en";
+                document.documentElement.lang =
+                    "en";
 
             }
 
         }
 
 
-        langES.addEventListener("click", function () {
+        langES.addEventListener(
+            "click",
+            function () {
 
-            setLanguage("es");
+                setLanguage("es");
 
-        });
+            }
+        );
 
 
-        langEN.addEventListener("click", function () {
+        langEN.addEventListener(
+            "click",
+            function () {
 
-            setLanguage("en");
+                setLanguage("en");
 
-        });
+            }
+        );
 
     </script>
 
