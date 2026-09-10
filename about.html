@@ -9,27 +9,33 @@
   <link rel="icon" type="image/png" href="mad.PNG">
 
   <style>
-
     * {
       box-sizing: border-box;
     }
 
+    html,
     body {
       margin: 0;
+      padding: 0;
       background: #111;
       color: #f2f2f2;
       font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body {
       min-height: 100vh;
     }
 
-    /* HEADER */
+    /* =========================
+       HEADER
+       ========================= */
 
     header {
-      width: 100%;
-      padding: 28px 32px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      position: relative;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 28px 24px 0;
+      height: 80px;
     }
 
     .logo-link {
@@ -55,88 +61,86 @@
     }
 
     .language {
+      position: absolute;
+      top: 34px;
+      right: 24px;
       display: flex;
       gap: 8px;
-      font-size: 12px;
+      font-size: 11px;
       letter-spacing: 1px;
     }
 
-    .language button {
-      background: none;
-      border: none;
-      color: #777;
-      padding: 0;
+    .language span {
       cursor: pointer;
-      font-size: 12px;
-      letter-spacing: 1px;
+      opacity: 0.45;
+      transition: opacity 0.2s ease;
     }
 
-    .language button.active {
-      color: #f2f2f2;
+    .language span.active {
+      opacity: 1;
     }
 
-    /* MAIN */
+    .language span:hover {
+      opacity: 1;
+    }
+
+    /* =========================
+       MAIN
+       ========================= */
 
     main {
       max-width: 900px;
       margin: 0 auto;
-      padding: 40px 28px 80px;
+      padding: 50px 24px 80px;
     }
 
     .page-title {
       text-align: center;
-      margin-bottom: 55px;
+      margin: 0;
+      font-size: clamp(28px, 5vw, 42px);
+      font-weight: 400;
+      letter-spacing: 5px;
     }
 
-    .page-title h1 {
-      margin: 0 0 10px;
-      font-size: 28px;
-      font-weight: 400;
+    .page-subtitle {
+      text-align: center;
+      margin: 12px 0 0;
+      color: #888;
+      font-size: 13px;
       letter-spacing: 1px;
     }
 
-    .page-title p {
-      margin: 0;
-      color: #888;
-      font-size: 13px;
-      letter-spacing: 0.5px;
-    }
-
-    /* ABOUT TEXT */
+    /* =========================
+       ABOUT TEXT
+       ========================= */
 
     .about-text {
       max-width: 680px;
-      margin: 0 auto 60px;
-      text-align: center;
+      margin: 55px auto 0;
     }
 
     .about-text p {
-      margin: 0 0 18px;
-      color: #ccc;
-      font-size: 16px;
+      margin: 0 0 24px;
+      font-size: 15px;
       line-height: 1.8;
+      color: #d0d0d0;
     }
 
-    /* PHOTO GALLERY */
+    /* =========================
+       PHOTO GALLERY
+       ========================= */
 
     .photo-gallery {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 8px;
-      margin-bottom: 70px;
+      margin-top: 55px;
     }
 
     .photo-placeholder {
       aspect-ratio: 16 / 9;
-      background: #1b1b1b;
-      border: 1px solid #292929;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #666;
-      font-size: 12px;
-      letter-spacing: 1px;
       overflow: hidden;
+      background: #1b1b1b;
       cursor: pointer;
     }
 
@@ -152,20 +156,53 @@
       opacity: 0.8;
     }
 
-    /* PHOTO LIGHTBOX */
+    /* =========================
+       FINAL MESSAGE
+       ========================= */
+
+    .final-message {
+      text-align: center;
+      margin-top: 70px;
+    }
+
+    .final-message h2 {
+      margin: 0;
+      font-size: clamp(18px, 3vw, 24px);
+      font-weight: 400;
+      letter-spacing: 4px;
+    }
+
+    .final-message p {
+      margin: 12px 0 0;
+      color: #777;
+      font-size: 11px;
+      letter-spacing: 2px;
+    }
+
+    /* =========================
+       LIGHTBOX
+       ========================= */
 
     .lightbox {
       position: fixed;
       inset: 0;
       background: rgba(0, 0, 0, 0.92);
+
       display: flex;
       align-items: center;
       justify-content: center;
+
       padding: 30px;
+
       z-index: 1000;
+
       opacity: 0;
       visibility: hidden;
-      transition: opacity 0.2s ease, visibility 0.2s ease;
+
+      transition:
+        opacity 0.2s ease,
+        visibility 0.2s ease;
+
       cursor: pointer;
     }
 
@@ -177,70 +214,51 @@
     .lightbox img {
       max-width: 95vw;
       max-height: 90vh;
+
       width: auto;
       height: auto;
+
       object-fit: contain;
       display: block;
-      cursor: default;
+
+      cursor: pointer;
     }
 
-    /* FINAL MESSAGE */
+    /* =========================
+       MOBILE
+       ========================= */
 
-    .final-message {
-      text-align: center;
-      padding: 20px 0 30px;
-    }
-
-    .final-message .main-line {
-      margin: 0 0 12px;
-      font-size: 22px;
-      font-weight: 400;
-      letter-spacing: 2px;
-    }
-
-    .final-message .sub-line {
-      margin: 0;
-      color: #777;
-      font-size: 12px;
-      letter-spacing: 1px;
-    }
-
-    /* MOBILE */
-
-    @media (max-width: 650px) {
+    @media (max-width: 600px) {
 
       header {
-        padding: 22px;
+        padding: 20px 18px 0;
+      }
+
+      .language {
+        top: 26px;
+        right: 18px;
       }
 
       main {
-        padding: 30px 20px 60px;
-      }
-
-      .page-title {
-        margin-bottom: 40px;
-      }
-
-      .page-title h1 {
-        font-size: 24px;
+        padding: 45px 18px 60px;
       }
 
       .about-text {
-        margin-bottom: 45px;
+        margin-top: 45px;
       }
 
       .about-text p {
-        font-size: 15px;
+        font-size: 14px;
+        line-height: 1.75;
       }
 
       .photo-gallery {
-        grid-template-columns: repeat(3, 1fr);
         gap: 5px;
-        margin-bottom: 55px;
+        margin-top: 45px;
       }
 
-      .photo-placeholder {
-        aspect-ratio: 16 / 9;
+      .final-message {
+        margin-top: 55px;
       }
 
       .lightbox {
@@ -251,22 +269,17 @@
         max-width: 96vw;
         max-height: 88vh;
       }
-
-      .final-message .main-line {
-        font-size: 19px;
-      }
-
     }
-
   </style>
 </head>
 
-
 <body>
 
-  <header>
+  <!-- =========================
+       HEADER
+       ========================= -->
 
-    <!-- Logo -->
+  <header>
 
     <a
       href="https://www.mad-birders.com"
@@ -280,141 +293,133 @@
       >
     </a>
 
-
-    <!-- Language -->
-
     <div class="language">
-
-      <button id="esBtn" class="active">ES</button>
-
-      <span>/</span>
-
-      <button id="enBtn">EN</button>
-
+      <span id="esBtn" class="active">ES</span>
+      <span>|</span>
+      <span id="enBtn">EN</span>
     </div>
 
   </header>
 
 
+  <!-- =========================
+       MAIN
+       ========================= -->
+
   <main>
 
+    <h1 class="page-title" id="pageTitle">
+      ACERCA
+    </h1>
 
-    <!-- TITLE -->
-
-    <section class="page-title">
-
-      <h1 id="pageTitle">
-        ACERCA
-      </h1>
-
-      <p id="pageSubtitle">
-        Una comunidad para observar, aprender y compartir
-      </p>
-
-    </section>
+    <p class="page-subtitle" id="pageSubtitle">
+      Una comunidad para observar, aprender y compartir
+    </p>
 
 
-    <!-- ABOUT -->
-
-    <section class="about-text">
+    <div class="about-text">
 
       <p id="aboutParagraph1">
-        Somos un grupo de amigos totalmente disfuncionales unidos por el amor y la obsesión por las aves, la flora y la fauna de México y el mundo. Salimos al campo, caminamos kilómetros por un ave de 10 centímetros, esperamos horas por una especie que probablemente nunca aparecerá y celebramos como niños cuando finalmente la encontramos.
+        Somos un grupo de amigos totalmente disfuncionales unidos por el amor
+        y la obsesión por las aves, la flora y la fauna de México y el mundo.
+        Salimos al campo, caminamos kilómetros por un ave de 10 centímetros,
+        esperamos horas por una especie que probablemente nunca aparecerá y
+        celebramos como niños cuando finalmente la encontramos.
       </p>
 
       <p id="aboutParagraph2">
-        También buscamos conocer, compartir y valorar la biodiversidad que nos rodea, porque creemos que para conservar la naturaleza primero hay que aprender a verla.
+        También buscamos conocer, compartir y valorar la biodiversidad que nos
+        rodea, porque creemos que para conservar la naturaleza primero hay que
+        aprender a verla.
       </p>
 
       <p id="aboutParagraph3">
-        Si alguna vez has hecho algo de lo anterior, probablemente ya eres un Mad Birder.
+        Si alguna vez has hecho algo de lo anterior, probablemente ya eres un
+        Mad Birder.
       </p>
 
-    </section>
+    </div>
 
 
-    <!-- PHOTO GALLERY -->
+    <!-- =========================
+         PHOTO GALLERY
+         ========================= -->
 
-    <section>
+    <div class="photo-gallery">
 
-      <div class="photo-gallery">
-
-        <div class="photo-placeholder">
-          <img
-            src="foto1.jpeg"
-            alt="Mad Birders"
-          >
-        </div>
-
-        <div class="photo-placeholder">
-          <img
-            src="foto2.jpeg"
-            alt="Mad Birders"
-          >
-        </div>
-
-        <div class="photo-placeholder">
-          <img
-            src="foto3.jpeg"
-            alt="Mad Birders"
-          >
-        </div>
-
+      <div class="photo-placeholder">
+        <img
+          src="foto1.jpeg"
+          alt="Mad Birders"
+        >
       </div>
 
-    </section>
+      <div class="photo-placeholder">
+        <img
+          src="foto2.jpeg"
+          alt="Mad Birders"
+        >
+      </div>
+
+      <div class="photo-placeholder">
+        <img
+          src="foto3.jpeg"
+          alt="Mad Birders"
+        >
+      </div>
+
+    </div>
 
 
-    <!-- FINAL -->
+    <!-- =========================
+         FINAL MESSAGE
+         ========================= -->
 
-    <section class="final-message">
+    <div class="final-message">
 
-      <p class="main-line" id="finalLine">
+      <h2 id="finalLine">
         CONOCER PARA PROTEGER
-      </p>
+      </h2>
 
-      <p class="sub-line" id="finalSubline">
+      <p id="finalSubline">
         Observar · Aprender · Compartir
       </p>
 
-    </section>
-
+    </div>
 
   </main>
 
 
-  <!-- PHOTO LIGHTBOX -->
+  <!-- =========================
+       LIGHTBOX
+       ========================= -->
 
   <div
     class="lightbox"
     id="lightbox"
     aria-hidden="true"
   >
-
     <img
       id="lightboxImage"
       src=""
       alt="Mad Birders"
     >
-
   </div>
 
 
+  <!-- =========================
+       JAVASCRIPT
+       ========================= -->
+
   <script>
 
-    const esBtn = document.getElementById("esBtn");
-    const enBtn = document.getElementById("enBtn");
-
-    const lightbox = document.getElementById("lightbox");
-    const lightboxImage = document.getElementById("lightboxImage");
-
-
-    /* LANGUAGE */
+    /* =========================
+       TRANSLATIONS
+       ========================= */
 
     const content = {
 
       es: {
-
         pageTitle: "ACERCA",
 
         pageSubtitle:
@@ -434,12 +439,9 @@
 
         finalSubline:
           "Observar · Aprender · Compartir"
-
       },
 
-
       en: {
-
         pageTitle: "ABOUT",
 
         pageSubtitle:
@@ -459,15 +461,23 @@
 
         finalSubline:
           "Observe · Learn · Share"
-
       }
 
     };
 
 
-    function setLanguage(lang) {
+    /* =========================
+       LANGUAGE SWITCH
+       ========================= */
 
-      const c = content[lang];
+    const esBtn = document.getElementById("esBtn");
+    const enBtn = document.getElementById("enBtn");
+
+    function setLanguage(language) {
+
+      const c = content[language];
+
+      document.documentElement.lang = language;
 
       document.getElementById("pageTitle").textContent =
         c.pageTitle;
@@ -490,31 +500,31 @@
       document.getElementById("finalSubline").textContent =
         c.finalSubline;
 
-      esBtn.classList.toggle(
-        "active",
-        lang === "es"
-      );
-
-      enBtn.classList.toggle(
-        "active",
-        lang === "en"
-      );
-
+      esBtn.classList.toggle("active", language === "es");
+      enBtn.classList.toggle("active", language === "en");
     }
 
+    esBtn.addEventListener("click", () => {
+      setLanguage("es");
+    });
 
-    esBtn.addEventListener(
-      "click",
-      () => setLanguage("es")
-    );
-
-    enBtn.addEventListener(
-      "click",
-      () => setLanguage("en")
-    );
+    enBtn.addEventListener("click", () => {
+      setLanguage("en");
+    });
 
 
-    /* PHOTO LIGHTBOX */
+    /* =========================
+       LIGHTBOX
+       ========================= */
+
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImage = document.getElementById("lightboxImage");
+
+
+    /*
+      Clic en una foto:
+      abre la versión maximizada.
+    */
 
     document
       .querySelectorAll(".photo-placeholder img")
@@ -537,7 +547,29 @@
       });
 
 
-    /* CLOSE WHEN CLICKING OUTSIDE THE PHOTO */
+    /*
+      Clic en la foto maximizada:
+      cierra el lightbox.
+    */
+
+    lightboxImage.addEventListener("click", event => {
+
+      event.stopPropagation();
+
+      lightbox.classList.remove("active");
+      lightbox.setAttribute("aria-hidden", "true");
+
+      lightboxImage.src = "";
+
+      document.body.style.overflow = "";
+
+    });
+
+
+    /*
+      Clic en cualquier parte oscura:
+      cierra el lightbox.
+    */
 
     lightbox.addEventListener("click", () => {
 
@@ -551,16 +583,9 @@
     });
 
 
-    /* PREVENT PHOTO CLICK FROM CLOSING */
-
-    lightboxImage.addEventListener("click", event => {
-
-      event.stopPropagation();
-
-    });
-
-
-    /* CLOSE WITH ESC */
+    /*
+      ESC también cierra.
+    */
 
     document.addEventListener("keydown", event => {
 
