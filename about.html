@@ -137,6 +137,7 @@
       font-size: 12px;
       letter-spacing: 1px;
       overflow: hidden;
+      cursor: pointer;
     }
 
     .photo-placeholder img {
@@ -144,6 +145,43 @@
       height: 100%;
       object-fit: cover;
       display: block;
+      transition: opacity 0.2s ease;
+    }
+
+    .photo-placeholder:hover img {
+      opacity: 0.8;
+    }
+
+    /* PHOTO LIGHTBOX */
+
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.92);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 30px;
+      z-index: 1000;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.2s ease, visibility 0.2s ease;
+      cursor: pointer;
+    }
+
+    .lightbox.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .lightbox img {
+      max-width: 95vw;
+      max-height: 90vh;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      display: block;
+      cursor: default;
     }
 
     /* FINAL MESSAGE */
@@ -203,6 +241,15 @@
 
       .photo-placeholder {
         aspect-ratio: 16 / 9;
+      }
+
+      .lightbox {
+        padding: 15px;
+      }
+
+      .lightbox img {
+        max-width: 96vw;
+        max-height: 88vh;
       }
 
       .final-message .main-line {
@@ -336,11 +383,33 @@
   </main>
 
 
+  <!-- PHOTO LIGHTBOX -->
+
+  <div
+    class="lightbox"
+    id="lightbox"
+    aria-hidden="true"
+  >
+
+    <img
+      id="lightboxImage"
+      src=""
+      alt="Mad Birders"
+    >
+
+  </div>
+
+
   <script>
 
     const esBtn = document.getElementById("esBtn");
     const enBtn = document.getElementById("enBtn");
 
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImage = document.getElementById("lightboxImage");
+
+
+    /* LANGUAGE */
 
     const content = {
 
@@ -443,6 +512,70 @@
       "click",
       () => setLanguage("en")
     );
+
+
+    /* PHOTO LIGHTBOX */
+
+    document
+      .querySelectorAll(".photo-placeholder img")
+      .forEach(img => {
+
+        img.addEventListener("click", event => {
+
+          event.stopPropagation();
+
+          lightboxImage.src = img.src;
+          lightboxImage.alt = img.alt;
+
+          lightbox.classList.add("active");
+          lightbox.setAttribute("aria-hidden", "false");
+
+          document.body.style.overflow = "hidden";
+
+        });
+
+      });
+
+
+    /* CLOSE WHEN CLICKING OUTSIDE THE PHOTO */
+
+    lightbox.addEventListener("click", () => {
+
+      lightbox.classList.remove("active");
+      lightbox.setAttribute("aria-hidden", "true");
+
+      lightboxImage.src = "";
+
+      document.body.style.overflow = "";
+
+    });
+
+
+    /* PREVENT PHOTO CLICK FROM CLOSING */
+
+    lightboxImage.addEventListener("click", event => {
+
+      event.stopPropagation();
+
+    });
+
+
+    /* CLOSE WITH ESC */
+
+    document.addEventListener("keydown", event => {
+
+      if (event.key === "Escape") {
+
+        lightbox.classList.remove("active");
+        lightbox.setAttribute("aria-hidden", "true");
+
+        lightboxImage.src = "";
+
+        document.body.style.overflow = "";
+
+      }
+
+    });
 
   </script>
 
